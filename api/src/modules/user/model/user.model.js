@@ -3,33 +3,37 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
     userName: {
         type: String,
-        minLength:3,
-        maxLength: 100,
         required: true,
-        trim: true,
-        unique:true
+        unique: true,
+        minLength: 3,
+        maxLength: 100,
+        trim:true
     },
     email: {
         type: String,
-        minLength: 5,
-        maxLength:200,
         required: true,
+        minLength: 8,
+        maxLength: 200,
         trim: true,
-        lowercase: true,
-        unique:true
+        lowerCase:true
     },
     password: {
         type: String,
         required: true,
-        trim: true,
-        minLength:8
+        trim:true,
+    },
+    phone: {
+        type: Number,
+        required: true,
+        trim:true
     },
     role: {
         type: String,
-        enum: ['ADMIN', 'USER'],
-        default:"USER",
-    }
-}, { timestamps: true })
+        enum: ['USER', 'ADMIN'],
+        default:'USER'
+    },
+
+})
 
 
 const User = mongoose.model('User', userSchema)

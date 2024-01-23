@@ -5,6 +5,7 @@ import Signin from "./components/Signin";
 import Signup from "./components/Signup";
 import Profile from "./components/Profile";
 import Navbar from "./components/Navbar";
+import NotFound from "./components/NotFound";
 
 
 export default function App() {
@@ -16,7 +17,8 @@ export default function App() {
         <Route path="/about" element={<About/>}/>
         <Route path="/sign-in" element={<Signin/>}/>
         <Route path="/sign-up" element={<Signup/>}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/*" element={<NotFound/>}/>
     </Routes>
     </BrowserRouter>
   )

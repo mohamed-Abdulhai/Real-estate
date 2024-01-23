@@ -1,24 +1,25 @@
 import User from "../../user/model/user.model.js"
 import bcryptjs from 'bcryptjs'
+import dotenv from 'dotenv'
+dotenv.config()
 
-const signUP = async(req,res) => {
+
+const signUP = async (req, res, next) => {
+    const { userName, email, password, phone } = req.body
+    const hashedPassword = bcryptjs.hashSync(password, 10)
     try {
-        const { userName, email, password } = req.body;
-        const hashedPassword = bcryptjs.hashSync(password, 10);
-        const newUser = new User({ userName, email, password: hashedPassword });
-        await newUser.save();
+        await User.create({
+            userName,email,password:hashedPassword,phone
+        })
         res.status(201).json({
-            message: "User created successfully",
-        });
+            message:'success'
+        })
     } catch (error) {
-        console.error("Error during signup:", error);
-        res.status(500).json({
-            message: "An error occurred during signup. Please try again later.",
-        });
+        next(error)
     }
 }
 const signIn = async(req,res) => {
-
+    res.status(500).json({error})
 }
 
 
